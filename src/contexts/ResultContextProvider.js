@@ -8,9 +8,7 @@ export const ResultContextProvider=({children})=>{
     const [loading,setLoading]=useState(false)
     const [searchTerm,setSearchTerm]=useState('')
 
-    const test=()=>{
-        console.log('yoo');
-    }
+    
     const getResults=async (type)=>{
 
         setLoading(true)
@@ -31,7 +29,7 @@ export const ResultContextProvider=({children})=>{
         setLoading(false)
     }
     return (
-        <ResultContext.Provider value={{getResults,results,loading,searchTerm,setSearchTerm,test}}>
+        <ResultContext.Provider value={{getResults,results,loading,searchTerm,setSearchTerm}}>
         {children}
         </ResultContext.Provider>
     )

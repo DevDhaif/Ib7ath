@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom'
 import ResultContext, { useResultContext } from '../contexts/ResultContextProvider'
 
 export const Results = () => {
-    const {results,loading,getResults,searchTerm,test}=useContext(ResultContext)
+    const {results,loading,getResults,searchTerm}=useContext(ResultContext)
     const location=useLocation()
 
     useEffect(()=>{
