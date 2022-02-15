@@ -2,7 +2,9 @@ import React, { createContext, useContext, useEffect } from 'react'
 import ReactPlayer from 'react-player'
 import { useLocation } from 'react-router-dom'
 import ResultContext, { useResultContext } from '../contexts/ResultContextProvider'
-import { Test } from './Images'
+import { Images } from './Images'
+import { News } from './News'
+import { Search } from './Search'
 
 export const Results = () => {
     const {results,loading,getResults,searchTerm}=useContext(ResultContext)
@@ -14,7 +16,7 @@ export const Results = () => {
         getResults('/search/q=${searchTerm} videos')
             }else{
 
-                getResults(`${location.pathname}/q=${searchTerm}&num=2`)
+                getResults(`${location.pathname}/q=${searchTerm}&num=10`)
             }
         }
         
@@ -26,28 +28,15 @@ export const Results = () => {
         
   switch (location.pathname) {
         case '/search':
-        return (
-            
-           
-                <div className='felx flex-wrap justify-between space-y-6 sm:px-8'>
-                {results?.results?.map(({link,title},index)=>(
-                    
-                    <div key={index} className='md:w-2/3 w-full '>
-                        <a href={link} target="_blank" rel='noreferrer'>
-                                <p className='text-sm'>
-                                    {link.length>30? link.substring(0,30):link}
-                                </p>
-                                <p className='text-lg hover:underline dark:text-blue-300 text-blue-700 '>{title}</p>
-                        </a>
-                    </div>
-                ))}
-                </div>
-            
-            );
+        return (<Search results={results}/>)
         case '/images':
-          return (<Test results={results}/>);
+            
+          return (
+              <Images image_results={results}/>
+            
+          );
         case '/news':
-          return 'SEARCH';
+          return (<News results={results}/>)
         case '/videos':
           return 'SEARCH';
           
