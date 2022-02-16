@@ -5,6 +5,7 @@ import ResultContext, { useResultContext } from '../contexts/ResultContextProvid
 import { Images } from './Images'
 import { News } from './News'
 import { Search } from './Search'
+import { Videos } from './Videos'
 
 export const Results = () => {
     const {results,loading,getResults,searchTerm}=useContext(ResultContext)
@@ -13,7 +14,7 @@ export const Results = () => {
     useEffect(()=>{
         if(searchTerm){
             if(location.pathname==='/videos'){
-        getResults('/search/q=${searchTerm} videos')
+        getResults(`/search/q=${searchTerm} videos`)
             }else{
 
                 getResults(`${location.pathname}/q=${searchTerm}&num=10`)
@@ -38,7 +39,7 @@ export const Results = () => {
         case '/news':
           return (<News results={results}/>)
         case '/videos':
-          return 'SEARCH';
+          return (<Videos results={results}/>);
           
       default:
           return 'ERROR';
