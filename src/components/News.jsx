@@ -6,17 +6,17 @@ export const News = ({results}) => {
             
                
     {results?.map(({links,title,id,source})=>(
-    <div key={id} className='md:w-2/3 w-full '>
+    <div key={title} className='md:w-2/3 w-full '>
         <a href={links?.[0].href} target="_blank" rel='noreferrer' className='hover:underline'>
                 <p className='text-lg dark:text-blue-300 text-blue-700'>
                     {title}
                 </p>
+                </a>
                 <div className='flex gap-4'>
                     <a href={source?.href} target="_blank" rel='noreferrer' className='hover:underline'>
                         {source?.href} 
                     </a>
                 </div>
-        </a>
     </div>
 ))}
 

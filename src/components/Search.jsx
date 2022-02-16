@@ -1,21 +1,29 @@
-import React from 'react'
+import React, { useState , useEffect, useContext} from 'react'
+import { Links } from './Links'
+import { useDebounce } from 'use-debounce'
+import ResultContext from '../contexts/ResultContextProvider'
+export const Search = () => {
+    const [text, setText] = useState('')
+    const {setSearchTerm} = useContext(ResultContext)
+    const [debounceValue]=useDebounce(text,3000)
 
-export const Search = ({results}) => {
+    useEffect(()=>{
+        if(debounceValue){
+        setSearchTerm(text)}
+    },[debounceValue])
   return (
-    
-    <div className='felx flex-wrap justify-between space-y-6 sm:px-8'>
-            
-    {results?.map(({link,title},index)=>(
-        <div key={index} className='md:w-2/3 w-full '>
-            <a href={link} target="_blank" rel='noreferrer'>
-                    <p className='text-sm'>
-                        {link.length>30? link.substring(0,30):link}
-                    </p>
-                    <p className='text-lg hover:underline dark:text-blue-300 text-blue-700 '>{title}</p>
-            </a>
-        </div>
-    ))}
+    <div className='relative sm:ml-48 md:ml-72 sm:-mt-10 mt-3'>
+        <input
+            value={text}
+            type='text'
+            className='sm:w-96 w-80 h-10 dark:bg-gray-200 border  rounded-lg shadow-sm outline-none p-6 text-black hover:shadow-lg'
+            placeholder='ابحث'
+            onChange={(e)=>setText(e.target.value)}
+        />
+        {text &&(
+            <button type='button' className='absolute top-2 right-4 text-xl text-gray-500' onClick={()=>setText('')}>X</button>
+        )}
+        <Links/>
     </div>
-
   )
 }
