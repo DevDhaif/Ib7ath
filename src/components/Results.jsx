@@ -17,7 +17,7 @@ export const Results = () => {
         getResults(`/search/q=${searchTerm} videos`)
             }else{
 
-                getResults(`${location.pathname}/q=${searchTerm}&num=10`)
+                getResults(`${location.pathname}/q=${searchTerm}&num=30`)
             }
         }
         
